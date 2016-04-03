@@ -30,6 +30,7 @@ type Config struct {
 	Override bool
 }
 
+// Runner performs the CQL migrations.
 type Runner struct {
 	driver   *driver
 	override bool
