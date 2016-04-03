@@ -1,0 +1,3 @@
+package: github.com/robzienert/cqlmigrate
+import:
+- package: github.com/gocql/gocql

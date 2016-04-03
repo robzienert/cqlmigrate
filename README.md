@@ -7,6 +7,11 @@ step.
 ```
 package main
 
+import (
+	"github.com/gocql/gocql"
+  "github.com/robzienert/cqlmigrate"
+)
+
 var migrations = []migration.Spec{
   {
     Name: "2016-01-01-initial_release",
@@ -23,7 +28,12 @@ var migrations = []migration.Spec{
 func main() {
   session, _ := gocql.NewCluster("127.0.0.1").CreateSession()
   
-  if err := cqlmigrate.Run("my_keyspace", session, migrations); err != nil {
+  conf := cqlmigrate.Config{
+    Session: session,
+    Keyspace: "my_keyspace",
+  }
+  
+  if err := cqlmigrate.New(conf).Run(migrations); err != nil {
     panic(err)
   }
 }
